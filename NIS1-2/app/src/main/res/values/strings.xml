@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">NIS</string>
+    <string name="FIO">Шагаров Дмитрий Александрович БПИ-202</string>
+    <string name="buttonTextShlyapa">Введите тут шляпу</string>
+    <string name="pressMe">Нажми меня</string>
+    <string name="gonnaBeShlyapa">А тут появится Ваша шляпа</string>
+</resources>
