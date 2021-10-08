@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">NIS3</string>
+    <string name="FIO">Шагаров Дмитрий Александрович БПИ202</string>
+    <string name="firstActivity">Первый актив</string>
+    <string name="enterSMT">Введите что-то</string>
+    <string name="toSecond">По второй…</string>
+    <string name="secondAct">Второй актив</string>
+    <string name="goBack">гоу бэк!</string>
+    <string name="entered2">Вы ввели такую шляпу</string>
+
+</resources>
