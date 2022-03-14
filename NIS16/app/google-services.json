@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "363526719519",
+    "project_id": "nis-project-1a411",
+    "storage_bucket": "nis-project-1a411.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:363526719519:android:3f066e93fdc05591dced2a",
+        "android_client_info": {
+          "package_name": "com.example.nis16"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "363526719519-tslbsqn21bmoi4pdsog65s39qfq14ig6.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDyF4cewVd1eObZwGNQxt6EWK_c7q-Q5to"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "363526719519-tslbsqn21bmoi4pdsog65s39qfq14ig6.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
