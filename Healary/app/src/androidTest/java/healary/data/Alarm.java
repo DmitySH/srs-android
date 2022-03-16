@@ -1,14 +1,15 @@
-package utils;
+package healary.data;
 
-import static utils.AlarmBroadcastReceiver.FRIDAY;
-import static utils.AlarmBroadcastReceiver.MONDAY;
-import static utils.AlarmBroadcastReceiver.RECURRING;
-import static utils.AlarmBroadcastReceiver.SATURDAY;
-import static utils.AlarmBroadcastReceiver.SUNDAY;
-import static utils.AlarmBroadcastReceiver.THURSDAY;
-import static utils.AlarmBroadcastReceiver.TITLE;
-import static utils.AlarmBroadcastReceiver.TUESDAY;
-import static utils.AlarmBroadcastReceiver.WEDNESDAY;
+
+import static bse202.sda.healary.broadcastreceiver.AlarmBroadcastReceiver.FRIDAY;
+import static bse202.sda.healary.broadcastreceiver.AlarmBroadcastReceiver.MONDAY;
+import static bse202.sda.healary.broadcastreceiver.AlarmBroadcastReceiver.RECURRING;
+import static bse202.sda.healary.broadcastreceiver.AlarmBroadcastReceiver.SATURDAY;
+import static bse202.sda.healary.broadcastreceiver.AlarmBroadcastReceiver.SUNDAY;
+import static bse202.sda.healary.broadcastreceiver.AlarmBroadcastReceiver.THURSDAY;
+import static bse202.sda.healary.broadcastreceiver.AlarmBroadcastReceiver.TITLE;
+import static bse202.sda.healary.broadcastreceiver.AlarmBroadcastReceiver.TUESDAY;
+import static bse202.sda.healary.broadcastreceiver.AlarmBroadcastReceiver.WEDNESDAY;
 
 import android.annotation.SuppressLint;
 import android.app.AlarmManager;
@@ -24,6 +25,9 @@ import androidx.room.PrimaryKey;
 
 import java.util.Calendar;
 
+import healary.broadcastreceiver.AlarmBroadcastReceiver;
+import healary.createalarm.DayUtil;
+
 @Entity(tableName = "alarm_table")
 public class Alarm {
     @PrimaryKey
@@ -35,10 +39,11 @@ public class Alarm {
     private boolean monday, tuesday, wednesday, thursday, friday, saturday, sunday;
     private String title;
 
-    public Alarm(int alarmId, int hour, int minute, String title,
-                 boolean started, boolean recurring,
-                 boolean monday, boolean tuesday, boolean wednesday, boolean thursday,
-                 boolean friday, boolean saturday, boolean sunday) {
+    private long created;
+
+    public Alarm(int alarmId, int hour, int minute, String title, long created, boolean started,
+                 boolean recurring, boolean monday, boolean tuesday, boolean wednesday,
+                 boolean thursday, boolean friday, boolean saturday, boolean sunday) {
         this.alarmId = alarmId;
         this.hour = hour;
         this.minute = minute;
@@ -55,8 +60,63 @@ public class Alarm {
         this.sunday = sunday;
 
         this.title = title;
+
+        this.created = created;
     }
 
+    public int getHour() {
+        return hour;
+    }
+
+    public int getMinute() {
+        return minute;
+    }
+
+    public boolean isStarted() {
+        return started;
+    }
+
+    public int getAlarmId() {
+        return alarmId;
+    }
+
+    public void setAlarmId(int alarmId) {
+        this.alarmId = alarmId;
+    }
+
+    public boolean isRecurring() {
+        return recurring;
+    }
+
+    public boolean isMonday() {
+        return monday;
+    }
+
+    public boolean isTuesday() {
+        return tuesday;
+    }
+
+    public boolean isWednesday() {
+        return wednesday;
+    }
+
+    public boolean isThursday() {
+        return thursday;
+    }
+
+    public boolean isFriday() {
+        return friday;
+    }
+
+    public boolean isSaturday() {
+        return saturday;
+    }
+
+    public boolean isSunday() {
+        return sunday;
+    }
+
+    @SuppressLint("DefaultLocale")
     public void schedule(Context context) {
         AlarmManager alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
 
@@ -102,8 +162,7 @@ public class Alarm {
                     alarmPendingIntent
             );
         } else {
-            String toastText = String.format("Recurring Alarm %s scheduled for %s at %02d:%02d",
-                    title, getRecurringDaysText(), hour, minute, alarmId);
+            String toastText = String.format("Recurring Alarm %s scheduled for %s at %02d:%02d", title, getRecurringDaysText(), hour, minute, alarmId);
             Toast.makeText(context, toastText, Toast.LENGTH_LONG).show();
 
             final long RUN_DAILY = 24 * 60 * 60 * 1000;
@@ -121,13 +180,55 @@ public class Alarm {
     public void cancelAlarm(Context context) {
         AlarmManager alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
         Intent intent = new Intent(context, AlarmBroadcastReceiver.class);
-        @SuppressLint("UnspecifiedImmutableFlag") PendingIntent alarmPendingIntent = PendingIntent.getBroadcast(context, alarmId, intent, 0);
+        PendingIntent alarmPendingIntent = PendingIntent.getBroadcast(context, alarmId, intent, 0);
         alarmManager.cancel(alarmPendingIntent);
         this.started = false;
 
-        @SuppressLint("DefaultLocale") String toastText =
-                String.format("Alarm cancelled for %02d:%02d with id %d", hour, minute, alarmId);
+        @SuppressLint("DefaultLocale") String toastText = String.format("Alarm cancelled for %02d:%02d with id %d", hour, minute, alarmId);
         Toast.makeText(context, toastText, Toast.LENGTH_SHORT).show();
         Log.i("cancel", toastText);
+    }
+
+    public String getRecurringDaysText() {
+        if (!recurring) {
+            return null;
+        }
+
+        String days = "";
+        if (monday) {
+            days += "Mo ";
+        }
+        if (tuesday) {
+            days += "Tu ";
+        }
+        if (wednesday) {
+            days += "We ";
+        }
+        if (thursday) {
+            days += "Th ";
+        }
+        if (friday) {
+            days += "Fr ";
+        }
+        if (saturday) {
+            days += "Sa ";
+        }
+        if (sunday) {
+            days += "Su ";
+        }
+
+        return days;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public long getCreated() {
+        return created;
+    }
+
+    public void setCreated(long created) {
+        this.created = created;
     }
 }

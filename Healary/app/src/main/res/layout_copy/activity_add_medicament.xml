@@ -143,15 +143,6 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:text="Вс" />
-                    <CheckBox
-                        android:id="@+id/fragment_createalarm_recurring"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:checked="false"
-                        android:text="Повторять"
-                        android:layout_weight="1"
-                        android:buttonTint="@color/purple_200"
-                        />
                 </LinearLayout>
             </LinearLayout>
         </androidx.cardview.widget.CardView>
@@ -241,7 +232,7 @@
             android:orientation="vertical">
 
             <Button
-                android:id="@+id/add_btn"
+                android:id="@+id/fragment_createalarm_scheduleAlarm"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Добавить"

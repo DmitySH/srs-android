@@ -1,25 +1,23 @@
-package bse202.sda.healary;
+package healary;
 
-import androidx.appcompat.app.AppCompatActivity;
-
-import android.app.NotificationChannel;
-import android.app.NotificationManager;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import androidx.appcompat.app.AppCompatActivity;
+
+import bse202.sda.healary.R;
 import data.HealDbHelper;
 import data.MedicamentContract;
 
 public class MainActivity extends AppCompatActivity {
     private Button addBtn;
     private HealDbHelper dbHelper;
-    public static final String CHANNEL_ID = "ALARM_SERVICE_CHANNEL";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -32,8 +30,6 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-
-        createNotificationChannnel();
         dbHelper = new HealDbHelper(this);
 
     }
@@ -42,17 +38,6 @@ public class MainActivity extends AppCompatActivity {
     protected void onStart() {
         super.onStart();
         displayDatabaseInfo();
-    }
-
-    private void createNotificationChannnel() {
-        NotificationChannel serviceChannel = new NotificationChannel(
-                CHANNEL_ID,
-                "Alarm Service Channel",
-                NotificationManager.IMPORTANCE_DEFAULT
-        );
-
-        NotificationManager manager = getSystemService(NotificationManager.class);
-        manager.createNotificationChannel(serviceChannel);
     }
 
 

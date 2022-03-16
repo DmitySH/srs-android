@@ -1,7 +1,8 @@
-package utils;
+package healary.service;
 
-import static bse202.sda.healary.MainActivity.CHANNEL_ID;
-import static utils.AlarmBroadcastReceiver.TITLE;
+
+import static bse202.sda.healary.application.App.CHANNEL_ID;
+import static bse202.sda.healary.broadcastreceiver.AlarmBroadcastReceiver.TITLE;
 
 import android.app.Notification;
 import android.app.PendingIntent;
@@ -16,6 +17,8 @@ import androidx.annotation.Nullable;
 import androidx.core.app.NotificationCompat;
 
 import bse202.sda.healary.R;
+import healary.RingActivity;
+
 
 public class AlarmService extends Service {
     private MediaPlayer mediaPlayer;
@@ -48,7 +51,7 @@ public class AlarmService extends Service {
 
         mediaPlayer.start();
 
-        long[] pattern = {0, 100, 1000};
+        long[] pattern = { 0, 100, 1000 };
         vibrator.vibrate(pattern, 0);
 
         startForeground(1, notification);

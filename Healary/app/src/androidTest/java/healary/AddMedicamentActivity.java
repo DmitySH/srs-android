@@ -1,9 +1,6 @@
-package bse202.sda.healary;
-
-import androidx.appcompat.app.AppCompatActivity;
+package healary;
 
 import android.content.ContentValues;
-import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -15,6 +12,9 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AppCompatActivity;
+
+import bse202.sda.healary.R;
 import data.HealDbHelper;
 import data.MedicamentContract;
 
@@ -26,10 +26,6 @@ public class AddMedicamentActivity extends AppCompatActivity {
 
     private Spinner mGenderSpinner;
 
-    /**
-     * Пол для гостя. Возможные варианты:
-     * 0 для кошки, 1 для кота, 2 - не определен.
-     */
     private int mGender = 2;
 
     @Override

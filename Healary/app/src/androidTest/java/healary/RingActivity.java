@@ -1,7 +1,4 @@
-package bse202.sda.healary;
-
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
+package healary;
 
 import android.animation.ObjectAnimator;
 import android.animation.ValueAnimator;
@@ -9,20 +6,24 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
+
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 
 import java.util.Calendar;
 import java.util.Random;
 
-import utils.Alarm;
-import utils.AlarmService;
+import bse202.sda.healary.R;
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import healary.data.Alarm;
+import healary.service.AlarmService;
 
 public class RingActivity extends AppCompatActivity {
-    @BindView(R.id.activity_ring_dismiss)
-    Button dismiss;
-    @BindView(R.id.activity_ring_snooze)
-    Button snooze;
-    @BindView(R.id.activity_ring_clock)
-    ImageView clock;
+    @BindView(R.id.activity_ring_dismiss) Button dismiss;
+    @BindView(R.id.activity_ring_snooze) Button snooze;
+    @BindView(R.id.activity_ring_clock) ImageView clock;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -52,6 +53,7 @@ public class RingActivity extends AppCompatActivity {
                         calendar.get(Calendar.HOUR_OF_DAY),
                         calendar.get(Calendar.MINUTE),
                         "Snooze",
+                        System.currentTimeMillis(),
                         true,
                         false,
                         false,
