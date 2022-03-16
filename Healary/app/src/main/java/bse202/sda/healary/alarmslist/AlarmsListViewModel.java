@@ -16,10 +16,12 @@ public class AlarmsListViewModel extends AndroidViewModel {
     private AlarmRepository alarmRepository;
     private LiveData<List<Alarm>> alarmsLiveData;
 
+
     public AlarmsListViewModel(@NonNull Application application) {
         super(application);
 
         alarmRepository = new AlarmRepository(application);
+        alarmRepository.deleteCancelled(new Object());
         alarmsLiveData = alarmRepository.getAlarmsLiveData();
     }
 

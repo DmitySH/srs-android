@@ -1,6 +1,7 @@
 package bse202.sda.healary.data;
 
 import android.app.Application;
+import android.os.AsyncTask;
 
 import androidx.lifecycle.LiveData;
 
@@ -20,6 +21,24 @@ public class AlarmRepository {
         AlarmDatabase.databaseWriteExecutor.execute(() -> {
             alarmDao.insert(alarm);
         });
+    }
+
+    public void deleteCancelled(Object alarm)  {
+        new deleteAsyncTask(alarmDao).execute(alarm);
+    }
+
+    private static class deleteAsyncTask extends AsyncTask<Object, Void, Void> {
+        private AlarmDao mAsyncTaskDao;
+
+        deleteAsyncTask(AlarmDao dao) {
+            mAsyncTaskDao = dao;
+        }
+
+        @Override
+        protected Void doInBackground(Object... objects) {
+            mAsyncTaskDao.deleteCancelled();
+            return null;
+        }
     }
 
     public void update(Alarm alarm) {
