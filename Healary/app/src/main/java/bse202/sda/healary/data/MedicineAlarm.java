@@ -252,4 +252,20 @@ public class MedicineAlarm {
     public int getMinCount() {
         return minCount;
     }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public void setMinCount(int minCount) {
+        this.minCount = minCount;
+    }
+
+    public void setDosage(int dosage) {
+        this.dosage = dosage;
+    }
 }

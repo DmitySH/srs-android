@@ -54,8 +54,10 @@ public class EditAlarmFragment extends Fragment {
         editAlarmViewModel.getById(alarmId).observe(this, alarms -> {
             if (alarms != null) {
                 alarm = alarms.get(0);
+                initView();
             }
         });
+
     }
 
     @Nullable
@@ -73,44 +75,26 @@ public class EditAlarmFragment extends Fragment {
         return view;
     }
 
+    private void initView() {
+        title.setText(alarm.getTitle());
+        description.setText(alarm.getDescription());
+
+        minCount.setText(String.valueOf(alarm.getMinCount()) );
+        count.setText(String.valueOf(alarm.getCount()));
+        dosage.setText(String.valueOf(alarm.getDosage()));
+    }
+
     private void editAlarm() {
-        alarm.setCount(123123);
+        alarm.setCount(parseInt(count));
+        alarm.setTitle(title.getText().toString());
+        alarm.setMinCount(parseInt(minCount));
+        alarm.setDosage(parseInt(dosage));
+        alarm.setDescription(description.getText().toString());
+
         editAlarmViewModel.edit(alarm);
 
 
     }
-
-//    private void scheduleAlarm() {
-//        int countParsed, minCountParsed, dosageParsed;
-//        countParsed = parseInt(count);
-//        minCountParsed = parseInt(minCount);
-//        dosageParsed = parseInt(dosage);
-//
-//        MedicineAlarm alarm = new MedicineAlarm(
-//                TimePickerUtil.getTimePickerHour(timePicker),
-//                TimePickerUtil.getTimePickerMinute(timePicker),
-//                title.getText().toString(),
-//                System.currentTimeMillis(),
-//                true,
-//                true,
-//                mon.isChecked(),
-//                tue.isChecked(),
-//                wed.isChecked(),
-//                thu.isChecked(),
-//                fri.isChecked(),
-//                sat.isChecked(),
-//                sun.isChecked(),
-//                countParsed,
-//                description.getText().toString(),
-//                minCountParsed,
-//                dosageParsed
-//
-//        );
-//
-//        createAlarmViewModel.insert(alarm);
-//
-//        alarm.schedule(requireContext());
-//    }
 
     private int parseInt(EditText edit) {
         int countParsed;
