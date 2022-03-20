@@ -28,10 +28,9 @@ import java.util.Calendar;
 import bse202.sda.healary.broadcastreceiver.AlarmBroadcastReceiver;
 import bse202.sda.healary.createalarm.DayUtil;
 
-@Entity(tableName = "alarm_table")
-public class Alarm {
-    @PrimaryKey
-    @NonNull
+@Entity(tableName = "medicine_alarm_table")
+public class MedicineAlarm {
+    @PrimaryKey(autoGenerate = true)
     private int alarmId;
 
     private int hour, minute;
@@ -39,10 +38,16 @@ public class Alarm {
     private boolean monday, tuesday, wednesday, thursday, friday, saturday, sunday;
     private String title;
 
+    private String description;
+    private int count;
+
     private long created;
 
-    public Alarm(int alarmId, int hour, int minute, String title, long created, boolean started, boolean recurring, boolean monday, boolean tuesday, boolean wednesday, boolean thursday, boolean friday, boolean saturday, boolean sunday) {
-        this.alarmId = alarmId;
+    public MedicineAlarm(int hour, int minute, String title,
+                         long created, boolean started, boolean recurring,
+                         boolean monday, boolean tuesday, boolean wednesday,
+                         boolean thursday, boolean friday, boolean saturday,
+                         boolean sunday, int count, String description) {
         this.hour = hour;
         this.minute = minute;
         this.started = started;
@@ -58,6 +63,8 @@ public class Alarm {
         this.sunday = sunday;
 
         this.title = title;
+        this.count = count;
+        this.description = description;
 
         this.created = created;
     }
@@ -76,10 +83,6 @@ public class Alarm {
 
     public int getAlarmId() {
         return alarmId;
-    }
-
-    public void setAlarmId(int alarmId) {
-        this.alarmId = alarmId;
     }
 
     public boolean isRecurring() {
@@ -128,6 +131,7 @@ public class Alarm {
         intent.putExtra(SUNDAY, sunday);
 
         intent.putExtra(TITLE, title);
+
 
         PendingIntent alarmPendingIntent = PendingIntent.getBroadcast(context, alarmId, intent, 0);
 
@@ -186,34 +190,31 @@ public class Alarm {
     }
 
     public String getRecurringDaysText() {
-        if (!recurring) {
-            return null;
-        }
 
-        String days = "";
+        StringBuilder days = new StringBuilder();
         if (monday) {
-            days += "Mo ";
+            days.append("Пн ");
         }
         if (tuesday) {
-            days += "Tu ";
+            days.append("Вт ");
         }
         if (wednesday) {
-            days += "We ";
+            days.append("Ср ");
         }
         if (thursday) {
-            days += "Th ";
+            days.append("Чт ");
         }
         if (friday) {
-            days += "Fr ";
+            days.append("Пт ");
         }
         if (saturday) {
-            days += "Sa ";
+            days.append("Сб ");
         }
         if (sunday) {
-            days += "Su ";
+            days.append("Вс ");
         }
 
-        return days;
+        return days.toString();
     }
 
     public String getTitle() {
@@ -224,7 +225,19 @@ public class Alarm {
         return created;
     }
 
-    public void setCreated(long created) {
-        this.created = created;
+    public String getDescription() {
+        return description;
+    }
+
+    public int getCount() {
+        return count;
+    }
+
+    public void setCount(int count) {
+        this.count = count;
+    }
+
+    public void setAlarmId(int alarmId) {
+        this.alarmId = alarmId;
     }
 }

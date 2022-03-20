@@ -9,22 +9,22 @@ import androidx.room.RoomDatabase;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-@Database(entities = {Alarm.class}, version = 1, exportSchema = false)
-public abstract class AlarmDatabase extends RoomDatabase {
-    public abstract AlarmDao alarmDao();
+@Database(entities = {MedicineAlarm.class}, version = 1, exportSchema = false)
+public abstract class MedicineAlarmDatabase extends RoomDatabase {
+    public abstract MedicineAlarmDao alarmDao();
 
-    private static volatile AlarmDatabase INSTANCE;
+    private static volatile MedicineAlarmDatabase INSTANCE;
     private static final int NUMBER_OF_THREADS = 4;
     static final ExecutorService databaseWriteExecutor = Executors.newFixedThreadPool(NUMBER_OF_THREADS);
 
-    static AlarmDatabase getDatabase(final Context context) {
+    static MedicineAlarmDatabase getDatabase(final Context context) {
         if (INSTANCE == null) {
-            synchronized (AlarmDatabase.class) {
+            synchronized (MedicineAlarmDatabase.class) {
                 if (INSTANCE == null) {
                     INSTANCE = Room.databaseBuilder(
                             context.getApplicationContext(),
-                            AlarmDatabase.class,
-                            "alarm_database"
+                            MedicineAlarmDatabase.class,
+                            "medicine_alarm_database"
                     ).build();
                 }
             }

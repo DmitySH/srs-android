@@ -1,5 +1,6 @@
 package bse202.sda.healary.alarmslist;
 
+import android.annotation.SuppressLint;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -8,19 +9,18 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 
-
 import java.util.ArrayList;
 import java.util.List;
 
 import bse202.sda.healary.R;
-import bse202.sda.healary.data.Alarm;
+import bse202.sda.healary.data.MedicineAlarm;
 
 public class AlarmRecyclerViewAdapter extends RecyclerView.Adapter<AlarmViewHolder> {
-    private List<Alarm> alarms;
-    private OnToggleAlarmListener listener;
+    private List<MedicineAlarm> alarms;
+    private final OnToggleAlarmListener listener;
 
     public AlarmRecyclerViewAdapter(OnToggleAlarmListener listener) {
-        this.alarms = new ArrayList<Alarm>();
+        this.alarms = new ArrayList<>();
         this.listener = listener;
     }
 
@@ -33,7 +33,7 @@ public class AlarmRecyclerViewAdapter extends RecyclerView.Adapter<AlarmViewHold
 
     @Override
     public void onBindViewHolder(@NonNull AlarmViewHolder holder, int position) {
-        Alarm alarm = alarms.get(position);
+        MedicineAlarm alarm = alarms.get(position);
         holder.bind(alarm);
     }
 
@@ -42,7 +42,8 @@ public class AlarmRecyclerViewAdapter extends RecyclerView.Adapter<AlarmViewHold
         return alarms.size();
     }
 
-    public void setAlarms(List<Alarm> alarms) {
+    @SuppressLint("NotifyDataSetChanged")
+    public void setAlarms(List<MedicineAlarm> alarms) {
         this.alarms = alarms;
         notifyDataSetChanged();
     }

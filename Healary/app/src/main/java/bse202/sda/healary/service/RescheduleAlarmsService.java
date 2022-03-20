@@ -10,8 +10,8 @@ import androidx.lifecycle.Observer;
 
 import java.util.List;
 
-import bse202.sda.healary.data.Alarm;
-import bse202.sda.healary.data.AlarmRepository;
+import bse202.sda.healary.data.MedicineAlarm;
+import bse202.sda.healary.data.MedicineAlarmRepository;
 
 public class RescheduleAlarmsService extends LifecycleService {
     @Override
@@ -23,15 +23,12 @@ public class RescheduleAlarmsService extends LifecycleService {
     public int onStartCommand(Intent intent, int flags, int startId) {
         super.onStartCommand(intent, flags, startId);
 
-        AlarmRepository alarmRepository = new AlarmRepository(getApplication());
+        MedicineAlarmRepository alarmRepository = new MedicineAlarmRepository(getApplication());
 
-        alarmRepository.getAlarmsLiveData().observe(this, new Observer<List<Alarm>>() {
-            @Override
-            public void onChanged(List<Alarm> alarms) {
-                for (Alarm a : alarms) {
-                    if (a.isStarted()) {
-                        a.schedule(getApplicationContext());
-                    }
+        alarmRepository.getAlarmsLiveData().observe(this, alarms -> {
+            for (MedicineAlarm a : alarms) {
+                if (a.isStarted()) {
+                    a.schedule(getApplicationContext());
                 }
             }
         });

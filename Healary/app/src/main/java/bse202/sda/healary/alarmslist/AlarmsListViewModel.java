@@ -9,27 +9,27 @@ import androidx.lifecycle.LiveData;
 
 import java.util.List;
 
-import bse202.sda.healary.data.Alarm;
-import bse202.sda.healary.data.AlarmRepository;
+import bse202.sda.healary.data.MedicineAlarm;
+import bse202.sda.healary.data.MedicineAlarmRepository;
 
 public class AlarmsListViewModel extends AndroidViewModel {
-    private AlarmRepository alarmRepository;
-    private LiveData<List<Alarm>> alarmsLiveData;
+    private final MedicineAlarmRepository alarmRepository;
+    private final LiveData<List<MedicineAlarm>> alarmsLiveData;
 
 
     public AlarmsListViewModel(@NonNull Application application) {
         super(application);
 
-        alarmRepository = new AlarmRepository(application);
+        alarmRepository = new MedicineAlarmRepository(application);
         alarmRepository.deleteCancelled(new Object());
         alarmsLiveData = alarmRepository.getAlarmsLiveData();
     }
 
-    public void update(Alarm alarm) {
+    public void update(MedicineAlarm alarm) {
         alarmRepository.update(alarm);
     }
 
-    public LiveData<List<Alarm>> getAlarmsLiveData() {
+    public LiveData<List<MedicineAlarm>> getAlarmsLiveData() {
         return alarmsLiveData;
     }
 }

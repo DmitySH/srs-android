@@ -7,18 +7,18 @@ import androidx.lifecycle.LiveData;
 
 import java.util.List;
 
-public class AlarmRepository {
-    private AlarmDao alarmDao;
-    private LiveData<List<Alarm>> alarmsLiveData;
+public class MedicineAlarmRepository {
+    private MedicineAlarmDao alarmDao;
+    private LiveData<List<MedicineAlarm>> alarmsLiveData;
 
-    public AlarmRepository(Application application) {
-        AlarmDatabase db = AlarmDatabase.getDatabase(application);
+    public MedicineAlarmRepository(Application application) {
+        MedicineAlarmDatabase db = MedicineAlarmDatabase.getDatabase(application);
         alarmDao = db.alarmDao();
         alarmsLiveData = alarmDao.getAlarms();
     }
 
-    public void insert(Alarm alarm) {
-        AlarmDatabase.databaseWriteExecutor.execute(() -> {
+    public void insert(MedicineAlarm alarm) {
+        MedicineAlarmDatabase.databaseWriteExecutor.execute(() -> {
             alarmDao.insert(alarm);
         });
     }
@@ -28,9 +28,9 @@ public class AlarmRepository {
     }
 
     private static class deleteAsyncTask extends AsyncTask<Object, Void, Void> {
-        private AlarmDao mAsyncTaskDao;
+        private MedicineAlarmDao mAsyncTaskDao;
 
-        deleteAsyncTask(AlarmDao dao) {
+        deleteAsyncTask(MedicineAlarmDao dao) {
             mAsyncTaskDao = dao;
         }
 
@@ -41,13 +41,13 @@ public class AlarmRepository {
         }
     }
 
-    public void update(Alarm alarm) {
-        AlarmDatabase.databaseWriteExecutor.execute(() -> {
+    public void update(MedicineAlarm alarm) {
+        MedicineAlarmDatabase.databaseWriteExecutor.execute(() -> {
             alarmDao.update(alarm);
         });
     }
 
-    public LiveData<List<Alarm>> getAlarmsLiveData() {
+    public LiveData<List<MedicineAlarm>> getAlarmsLiveData() {
         return alarmsLiveData;
     }
 }

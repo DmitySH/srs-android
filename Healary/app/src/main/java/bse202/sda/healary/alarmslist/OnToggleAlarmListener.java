@@ -1,8 +1,8 @@
 package bse202.sda.healary.alarmslist;
 
 
-import bse202.sda.healary.data.Alarm;
+import bse202.sda.healary.data.MedicineAlarm;
 
 public interface OnToggleAlarmListener {
-    void onToggle(Alarm alarm);
+    void onToggle(MedicineAlarm alarm);
 }

@@ -10,7 +10,8 @@
         android:id="@+id/textView"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="Ring Ring"
+        android:text="Время пить таблетки"
+        android:textSize="30dp"
         android:textAlignment="center"
         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
         app:layout_constraintEnd_toEndOf="parent"
@@ -23,25 +24,17 @@
         android:layout_height="300dp"
         app:layout_constraintBottom_toTopOf="@+id/activity_ring_dismiss"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.495"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView"
-        app:srcCompat="@drawable/ic_alarm_black_24dp"
-        />
+        app:layout_constraintVertical_bias="0.415"
+        app:srcCompat="@drawable/ic_alarm_black_24dp" />
 
     <Button
         android:id="@+id/activity_ring_dismiss"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="Dismiss"
-        app:layout_constraintBottom_toTopOf="@+id/activity_ring_snooze"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <Button
-        android:id="@+id/activity_ring_snooze"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:text="Snooze"
+        android:text="Таблетка принята"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
