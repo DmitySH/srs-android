@@ -23,7 +23,19 @@ public class MedicineAlarmRepository {
         });
     }
 
-    public void deleteCancelled(Object alarm)  {
+    public void edit(MedicineAlarm alarm) {
+        MedicineAlarmDatabase.databaseWriteExecutor.execute(() -> {
+            alarmDao.update(alarm);
+        });
+    }
+
+    public LiveData<List<MedicineAlarm>> getById(long id) {
+        LiveData<List<MedicineAlarm>> d = alarmDao.getById(id);
+
+        return d;
+    }
+
+    public void deleteCancelled(Object alarm) {
         new deleteAsyncTask(alarmDao).execute(alarm);
     }
 

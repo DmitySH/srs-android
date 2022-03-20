@@ -13,13 +13,27 @@
         <action
             android:id="@+id/action_alarmsListFragment_to_createAlarmFragment"
             app:destination="@id/createAlarmFragment" />
+        <action
+            android:id="@+id/action_alarmsListFragment_to_editAlarmFragment"
+            app:destination="@id/editAlarmFragment">
+        </action>
     </fragment>
+
     <fragment
         android:id="@+id/createAlarmFragment"
         android:name="bse202.sda.healary.createalarm.CreateAlarmFragment"
         android:label="CreateAlarmFragment" >
         <action
             android:id="@+id/action_createAlarmFragment_to_alarmsListFragment"
+            app:destination="@id/alarmsListFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/editAlarmFragment"
+        android:name="bse202.sda.healary.createalarm.EditAlarmFragment"
+        android:label="EditAlarmFragment" >
+        <action
+            android:id="@+id/action_editAlarmFragment_to_alarmsListFragment"
             app:destination="@id/alarmsListFragment" />
     </fragment>
 </navigation>

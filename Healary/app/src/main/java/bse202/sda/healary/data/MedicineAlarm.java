@@ -39,7 +39,8 @@ public class MedicineAlarm {
     private String title;
 
     private String description;
-    private int count;
+    private int count, minCount, dosage;
+
 
     private long created;
 
@@ -47,7 +48,8 @@ public class MedicineAlarm {
                          long created, boolean started, boolean recurring,
                          boolean monday, boolean tuesday, boolean wednesday,
                          boolean thursday, boolean friday, boolean saturday,
-                         boolean sunday, int count, String description) {
+                         boolean sunday, int count, String description,
+                         int minCount, int dosage) {
         this.hour = hour;
         this.minute = minute;
         this.started = started;
@@ -65,6 +67,8 @@ public class MedicineAlarm {
         this.title = title;
         this.count = count;
         this.description = description;
+        this.minCount = minCount;
+        this.dosage = dosage;
 
         this.created = created;
     }
@@ -239,5 +243,13 @@ public class MedicineAlarm {
 
     public void setAlarmId(int alarmId) {
         this.alarmId = alarmId;
+    }
+
+    public int getDosage() {
+        return dosage;
+    }
+
+    public int getMinCount() {
+        return minCount;
     }
 }

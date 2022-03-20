@@ -48,6 +48,10 @@ public class CreateAlarmFragment extends Fragment {
 
     @BindView(R.id.edit_count)
     EditText count;
+    @BindView(R.id.edit_min_count)
+    EditText minCount;
+    @BindView(R.id.edit_dosen)
+    EditText dosage;
     @BindView(R.id.edit_desc)
     EditText description;
 
@@ -77,18 +81,10 @@ public class CreateAlarmFragment extends Fragment {
     }
 
     private void scheduleAlarm() {
-        int countParsed;
-        try {
-            countParsed = Integer.parseInt(count.getText().toString());
-            if (countParsed < 0) {
-                countParsed = 0;
-            }
-            if (countParsed > 1_000_000) {
-                countParsed = 1_000_000;
-            }
-        } catch (NumberFormatException ex) {
-            countParsed = 0;
-        }
+        int countParsed, minCountParsed, dosageParsed;
+        countParsed = parseInt(count);
+        minCountParsed = parseInt(minCount);
+        dosageParsed = parseInt(dosage);
 
         MedicineAlarm alarm = new MedicineAlarm(
                 TimePickerUtil.getTimePickerHour(timePicker),
@@ -105,11 +101,30 @@ public class CreateAlarmFragment extends Fragment {
                 sat.isChecked(),
                 sun.isChecked(),
                 countParsed,
-                description.getText().toString()
+                description.getText().toString(),
+                minCountParsed,
+                dosageParsed
+
         );
 
         createAlarmViewModel.insert(alarm);
 
         alarm.schedule(requireContext());
+    }
+
+    private int parseInt(EditText edit) {
+        int countParsed;
+        try {
+            countParsed = Integer.parseInt(edit.getText().toString());
+            if (countParsed < 0) {
+                countParsed = 0;
+            }
+            if (countParsed > 1_000_000) {
+                countParsed = 1_000_000;
+            }
+        } catch (NumberFormatException ex) {
+            countParsed = 0;
+        }
+        return countParsed;
     }
 }

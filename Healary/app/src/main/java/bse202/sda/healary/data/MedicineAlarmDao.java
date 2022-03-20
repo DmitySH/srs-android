@@ -13,6 +13,12 @@ public interface MedicineAlarmDao {
     @Insert
     void insert(MedicineAlarm alarm);
 
+    @Query("SELECT * FROM MEDICINE_ALARM_TABLE WHERE alarmId =:id")
+    LiveData<List<MedicineAlarm>> getById(long id);
+
+    @Query("UPDATE MEDICINE_ALARM_TABLE SET count = :count, minCount = :minCount WHERE alarmId =:id")
+    void update(int count, int minCount, int id);
+
     @Query("DELETE FROM MEDICINE_ALARM_TABLE")
     void deleteAll();
 
