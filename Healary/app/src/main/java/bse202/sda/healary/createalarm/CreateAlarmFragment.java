@@ -87,8 +87,8 @@ public class CreateAlarmFragment extends Fragment {
         dosageParsed = parseInt(dosage);
 
         MedicineAlarm alarm = new MedicineAlarm(
-                TimePickerUtil.getTimePickerHour(timePicker),
-                TimePickerUtil.getTimePickerMinute(timePicker),
+                timePicker.getHour(),
+                timePicker.getMinute(),
                 title.getText().toString(),
                 System.currentTimeMillis(),
                 true,

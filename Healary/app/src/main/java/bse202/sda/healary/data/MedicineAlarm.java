@@ -18,7 +18,6 @@ import android.content.Intent;
 import android.util.Log;
 import android.widget.Toast;
 
-import androidx.annotation.NonNull;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
@@ -27,7 +26,6 @@ import java.util.Calendar;
 import java.util.Locale;
 
 import bse202.sda.healary.broadcastreceiver.AlarmBroadcastReceiver;
-import bse202.sda.healary.createalarm.DayUtil;
 
 @Entity(tableName = "medicine_alarm_table")
 public class MedicineAlarm {

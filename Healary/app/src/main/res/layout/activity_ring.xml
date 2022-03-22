@@ -31,6 +31,7 @@
         app:srcCompat="@drawable/ic_alarm_black_24dp" />
 
     <Button
+        style="@style/BlueButton"
         android:id="@+id/activity_ring_dismiss"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
