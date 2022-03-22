@@ -59,14 +59,14 @@ public class AlarmService extends Service {
         PendingIntent pendingIntent = PendingIntent.getActivity(this, 0,
                 notificationIntent, PendingIntent.FLAG_IMMUTABLE | PendingIntent.FLAG_UPDATE_CURRENT);
 
-        String alarmTitle = "Alarm";
+        String alarmTitle = "Напоминание";
 
         NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(this, channel);
 
 
         return mBuilder
                 .setCategory(Notification.CATEGORY_SERVICE).setContentTitle(alarmTitle)
-                .setContentText("Ring Ring .. Ring Ring")
+                .setContentText("Время принять препарат!")
                 .setSmallIcon(R.drawable.ic_alarm_black_24dp)
                 .setContentIntent(pendingIntent)
                 .build();

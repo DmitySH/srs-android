@@ -24,11 +24,11 @@ public class AlarmBroadcastReceiver extends BroadcastReceiver {
     @Override
     public void onReceive(Context context, Intent intent) {
         if (Intent.ACTION_BOOT_COMPLETED.equals(intent.getAction())) {
-            String toastText = "Alarm Reboot";
+            String toastText = "Перезагрузка";
             Toast.makeText(context, toastText, Toast.LENGTH_SHORT).show();
             startRescheduleAlarmsService(context);
         } else {
-            String toastText = "Alarm Received";
+            String toastText = "Уведомление";
             Toast.makeText(context, toastText, Toast.LENGTH_SHORT).show();
             if (!intent.getBooleanExtra(RECURRING, false)) {
                 startAlarmService(context, intent);
