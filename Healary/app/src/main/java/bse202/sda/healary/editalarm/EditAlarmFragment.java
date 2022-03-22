@@ -35,7 +35,6 @@ public class EditAlarmFragment extends Fragment {
     @BindView(R.id.fragment_editalarm_take)
     Button take;
 
-    private long alarmId;
     private EditAlarmViewModel editAlarmViewModel;
     private MedicineAlarm alarm;
 
@@ -43,7 +42,7 @@ public class EditAlarmFragment extends Fragment {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         editAlarmViewModel = ViewModelProviders.of(this).get(EditAlarmViewModel.class);
-        alarmId = requireArguments().getInt("alarmId");
+        long alarmId = requireArguments().getInt("alarmId");
 
         editAlarmViewModel.getById(alarmId).observe(this, alarms -> {
             if (alarms != null) {
@@ -67,8 +66,8 @@ public class EditAlarmFragment extends Fragment {
         });
 
         take.setOnClickListener(v -> {
-            alarm.setCount(alarm.getCount() - alarm.getDosage());
-            editAlarmViewModel.edit(alarm);
+                    alarm.setCount(alarm.getCount() - alarm.getDosage());
+                    editAlarmViewModel.edit(alarm);
                 }
         );
 

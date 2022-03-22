@@ -5,24 +5,16 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.CheckBox;
 import android.widget.EditText;
-import android.widget.TimePicker;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.LiveData;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.navigation.Navigation;
 
-import java.util.List;
-import java.util.Objects;
-
 import bse202.sda.healary.R;
-import bse202.sda.healary.alarmslist.AlarmsListViewModel;
 import bse202.sda.healary.data.MedicineAlarm;
-import bse202.sda.healary.data.MedicineAlarmDao;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
@@ -43,7 +35,6 @@ public class EditAlarmFragment extends Fragment {
     @BindView(R.id.fragment_editalarm_take)
     Button take;
 
-    private long alarmId;
     private EditAlarmViewModel editAlarmViewModel;
     private MedicineAlarm alarm;
 
@@ -51,7 +42,7 @@ public class EditAlarmFragment extends Fragment {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         editAlarmViewModel = ViewModelProviders.of(this).get(EditAlarmViewModel.class);
-        alarmId = requireArguments().getInt("alarmId");
+        long alarmId = requireArguments().getInt("alarmId");
 
         editAlarmViewModel.getById(alarmId).observe(this, alarms -> {
             if (alarms != null) {
@@ -75,8 +66,8 @@ public class EditAlarmFragment extends Fragment {
         });
 
         take.setOnClickListener(v -> {
-            alarm.setCount(alarm.getCount() - alarm.getDosage());
-            editAlarmViewModel.edit(alarm);
+                    alarm.setCount(alarm.getCount() - alarm.getDosage());
+                    editAlarmViewModel.edit(alarm);
                 }
         );
 

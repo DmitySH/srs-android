@@ -8,8 +8,8 @@ import androidx.lifecycle.LiveData;
 import java.util.List;
 
 public class MedicineAlarmRepository {
-    private MedicineAlarmDao alarmDao;
-    private LiveData<List<MedicineAlarm>> alarmsLiveData;
+    private final MedicineAlarmDao alarmDao;
+    private final LiveData<List<MedicineAlarm>> alarmsLiveData;
 
     public MedicineAlarmRepository(Application application) {
         MedicineAlarmDatabase db = MedicineAlarmDatabase.getDatabase(application);
@@ -18,29 +18,31 @@ public class MedicineAlarmRepository {
     }
 
     public void insert(MedicineAlarm alarm) {
-        MedicineAlarmDatabase.databaseWriteExecutor.execute(() -> {
-            alarmDao.insert(alarm);
-        });
+        MedicineAlarmDatabase.databaseWriteExecutor.execute(() -> alarmDao.insert(alarm));
     }
 
     public void edit(MedicineAlarm alarm) {
-        MedicineAlarmDatabase.databaseWriteExecutor.execute(() -> {
-            alarmDao.update(alarm);
-        });
+        MedicineAlarmDatabase.databaseWriteExecutor.execute(() -> alarmDao.update(alarm));
     }
 
     public LiveData<List<MedicineAlarm>> getById(long id) {
-        LiveData<List<MedicineAlarm>> d = alarmDao.getById(id);
-
-        return d;
+        return alarmDao.getById(id);
     }
 
     public void deleteCancelled(Object alarm) {
         new deleteAsyncTask(alarmDao).execute(alarm);
     }
 
+    public void update(MedicineAlarm alarm) {
+        MedicineAlarmDatabase.databaseWriteExecutor.execute(() -> alarmDao.update(alarm));
+    }
+
+    public LiveData<List<MedicineAlarm>> getAlarmsLiveData() {
+        return alarmsLiveData;
+    }
+
     private static class deleteAsyncTask extends AsyncTask<Object, Void, Void> {
-        private MedicineAlarmDao mAsyncTaskDao;
+        private final MedicineAlarmDao mAsyncTaskDao;
 
         deleteAsyncTask(MedicineAlarmDao dao) {
             mAsyncTaskDao = dao;
@@ -51,15 +53,5 @@ public class MedicineAlarmRepository {
             mAsyncTaskDao.deleteCancelled();
             return null;
         }
-    }
-
-    public void update(MedicineAlarm alarm) {
-        MedicineAlarmDatabase.databaseWriteExecutor.execute(() -> {
-            alarmDao.update(alarm);
-        });
-    }
-
-    public LiveData<List<MedicineAlarm>> getAlarmsLiveData() {
-        return alarmsLiveData;
     }
 }

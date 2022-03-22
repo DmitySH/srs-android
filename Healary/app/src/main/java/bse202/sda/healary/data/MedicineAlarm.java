@@ -21,7 +21,6 @@ import android.widget.Toast;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
-
 import java.util.Calendar;
 import java.util.Locale;
 
@@ -29,12 +28,8 @@ import bse202.sda.healary.broadcastreceiver.AlarmBroadcastReceiver;
 
 @Entity(tableName = "medicine_alarm_table")
 public class MedicineAlarm {
-    @PrimaryKey(autoGenerate = true)
-    private int alarmId;
-
     private final int hour;
     private final int minute;
-    private boolean started;
     private final boolean recurring;
     private final boolean monday;
     private final boolean tuesday;
@@ -43,13 +38,13 @@ public class MedicineAlarm {
     private final boolean friday;
     private final boolean saturday;
     private final boolean sunday;
+    private final long created;
+    @PrimaryKey(autoGenerate = true)
+    private int alarmId;
+    private boolean started;
     private String title;
-
     private String description;
     private int count, minCount, dosage;
-
-
-    private final long created;
 
     public MedicineAlarm(int hour, int minute, String title,
                          long created, boolean started, boolean recurring,
@@ -94,6 +89,10 @@ public class MedicineAlarm {
 
     public int getAlarmId() {
         return alarmId;
+    }
+
+    public void setAlarmId(int alarmId) {
+        this.alarmId = alarmId;
     }
 
     public boolean isRecurring() {
@@ -222,12 +221,20 @@ public class MedicineAlarm {
         return title;
     }
 
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
     public long getCreated() {
         return created;
     }
 
     public String getDescription() {
         return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public int getCount() {
@@ -240,31 +247,19 @@ public class MedicineAlarm {
         }
     }
 
-    public void setAlarmId(int alarmId) {
-        this.alarmId = alarmId;
-    }
-
     public int getDosage() {
         return dosage;
+    }
+
+    public void setDosage(int dosage) {
+        this.dosage = dosage;
     }
 
     public int getMinCount() {
         return minCount;
     }
 
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
     public void setMinCount(int minCount) {
         this.minCount = minCount;
-    }
-
-    public void setDosage(int dosage) {
-        this.dosage = dosage;
     }
 }

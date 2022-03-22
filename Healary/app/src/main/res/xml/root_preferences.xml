@@ -13,8 +13,7 @@
         <EditTextPreference
             app:key="numbers"
             app:title="Телефоны для экстренных случаев"
-            app:useSimpleSummaryProvider="true"
-            />
+            app:useSimpleSummaryProvider="true" />
     </PreferenceCategory>
 
 </PreferenceScreen>

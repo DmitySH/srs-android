@@ -14,7 +14,6 @@ import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-
 import bse202.sda.healary.R;
 import bse202.sda.healary.data.MedicineAlarm;
 

@@ -10,7 +10,7 @@ import bse202.sda.healary.data.MedicineAlarmRepository;
 
 
 public class CreateAlarmViewModel extends AndroidViewModel {
-    private MedicineAlarmRepository alarmRepository;
+    private final MedicineAlarmRepository alarmRepository;
 
     public CreateAlarmViewModel(@NonNull Application application) {
         super(application);

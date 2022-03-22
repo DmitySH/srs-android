@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
-        android:title="Настройки"
-        android:id="@+id/settings" />
+        android:id="@+id/settings"
+        android:title="Настройки" />
     <item
-        android:title="Об авторе"
-        android:id="@+id/author" />
+        android:id="@+id/author"
+        android:title="Об авторе" />
 </menu>

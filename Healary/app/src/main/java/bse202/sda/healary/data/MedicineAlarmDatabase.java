@@ -11,11 +11,9 @@ import java.util.concurrent.Executors;
 
 @Database(entities = {MedicineAlarm.class}, version = 1, exportSchema = false)
 public abstract class MedicineAlarmDatabase extends RoomDatabase {
-    public abstract MedicineAlarmDao alarmDao();
-
-    private static volatile MedicineAlarmDatabase INSTANCE;
     private static final int NUMBER_OF_THREADS = 4;
     static final ExecutorService databaseWriteExecutor = Executors.newFixedThreadPool(NUMBER_OF_THREADS);
+    private static volatile MedicineAlarmDatabase INSTANCE;
 
     static MedicineAlarmDatabase getDatabase(final Context context) {
         if (INSTANCE == null) {
@@ -31,4 +29,6 @@ public abstract class MedicineAlarmDatabase extends RoomDatabase {
         }
         return INSTANCE;
     }
+
+    public abstract MedicineAlarmDao alarmDao();
 }

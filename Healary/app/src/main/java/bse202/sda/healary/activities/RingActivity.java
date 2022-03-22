@@ -10,15 +10,16 @@ import android.widget.ImageView;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
-
 import bse202.sda.healary.R;
 import bse202.sda.healary.service.AlarmService;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
 public class RingActivity extends AppCompatActivity {
-    @BindView(R.id.activity_ring_dismiss) Button dismiss;
-    @BindView(R.id.activity_ring_clock) ImageView clock;
+    @BindView(R.id.activity_ring_dismiss)
+    Button dismiss;
+    @BindView(R.id.activity_ring_clock)
+    ImageView clock;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {

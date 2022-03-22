@@ -12,7 +12,7 @@ import bse202.sda.healary.data.MedicineAlarm;
 import bse202.sda.healary.data.MedicineAlarmRepository;
 
 public class EditAlarmViewModel extends AndroidViewModel {
-    private MedicineAlarmRepository alarmRepository;
+    private final MedicineAlarmRepository alarmRepository;
 
     public EditAlarmViewModel(@NonNull Application application) {
         super(application);
@@ -23,6 +23,7 @@ public class EditAlarmViewModel extends AndroidViewModel {
     public void edit(MedicineAlarm alarm) {
         alarmRepository.edit(alarm);
     }
+
     public LiveData<List<MedicineAlarm>> getById(long id) {
         return alarmRepository.getById(id);
     }

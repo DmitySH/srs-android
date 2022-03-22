@@ -8,7 +8,6 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,8 +15,8 @@ import bse202.sda.healary.R;
 import bse202.sda.healary.data.MedicineAlarm;
 
 public class AlarmRecyclerViewAdapter extends RecyclerView.Adapter<AlarmViewHolder> {
-    private List<MedicineAlarm> alarms;
     private final OnToggleAlarmListener listener;
+    private List<MedicineAlarm> alarms;
 
     public AlarmRecyclerViewAdapter(OnToggleAlarmListener listener) {
         this.alarms = new ArrayList<>();

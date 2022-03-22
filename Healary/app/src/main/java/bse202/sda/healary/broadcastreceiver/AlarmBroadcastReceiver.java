@@ -3,9 +3,7 @@ package bse202.sda.healary.broadcastreceiver;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
-import android.os.Build;
 import android.widget.Toast;
-
 
 import java.util.Calendar;
 
@@ -29,13 +27,13 @@ public class AlarmBroadcastReceiver extends BroadcastReceiver {
             String toastText = "Alarm Reboot";
             Toast.makeText(context, toastText, Toast.LENGTH_SHORT).show();
             startRescheduleAlarmsService(context);
-        }
-        else {
+        } else {
             String toastText = "Alarm Received";
             Toast.makeText(context, toastText, Toast.LENGTH_SHORT).show();
             if (!intent.getBooleanExtra(RECURRING, false)) {
                 startAlarmService(context, intent);
-            } {
+            }
+            {
                 if (alarmIsToday(intent)) {
                     startAlarmService(context, intent);
                 }
@@ -48,7 +46,7 @@ public class AlarmBroadcastReceiver extends BroadcastReceiver {
         calendar.setTimeInMillis(System.currentTimeMillis());
         int today = calendar.get(Calendar.DAY_OF_WEEK);
 
-        switch(today) {
+        switch (today) {
             case Calendar.MONDAY:
                 return intent.getBooleanExtra(MONDAY, false);
             case Calendar.TUESDAY:

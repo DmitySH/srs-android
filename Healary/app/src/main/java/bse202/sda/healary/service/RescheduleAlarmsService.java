@@ -3,12 +3,9 @@ package bse202.sda.healary.service;
 import android.content.Intent;
 import android.os.IBinder;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.lifecycle.LifecycleService;
-import androidx.lifecycle.Observer;
-
-
-import java.util.List;
 
 import bse202.sda.healary.data.MedicineAlarm;
 import bse202.sda.healary.data.MedicineAlarmRepository;
@@ -43,7 +40,7 @@ public class RescheduleAlarmsService extends LifecycleService {
 
     @Nullable
     @Override
-    public IBinder onBind(Intent intent) {
+    public IBinder onBind(@NonNull Intent intent) {
         super.onBind(intent);
         return null;
     }

@@ -1,6 +1,5 @@
 package bse202.sda.healary.alarmslist;
 
-import android.annotation.SuppressLint;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
@@ -12,7 +11,6 @@ import androidx.appcompat.widget.SwitchCompat;
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.RecyclerView;
 
-
 import java.util.Locale;
 
 import bse202.sda.healary.R;
@@ -23,10 +21,8 @@ public class AlarmViewHolder extends RecyclerView.ViewHolder {
     private final TextView alarmRecurringDays;
     private final TextView alarmTitle;
     private final LinearLayout layout;
-
-    SwitchCompat alarmStarted;
-
     private final OnToggleAlarmListener listener;
+    SwitchCompat alarmStarted;
 
     public AlarmViewHolder(@NonNull View itemView, OnToggleAlarmListener listener) {
         super(itemView);

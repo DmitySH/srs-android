@@ -15,10 +15,6 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.navigation.Navigation;
 
-
-import java.util.Objects;
-import java.util.Random;
-
 import bse202.sda.healary.R;
 import bse202.sda.healary.data.MedicineAlarm;
 import butterknife.BindView;
