@@ -24,6 +24,7 @@ import androidx.room.PrimaryKey;
 
 
 import java.util.Calendar;
+import java.util.Locale;
 
 import bse202.sda.healary.broadcastreceiver.AlarmBroadcastReceiver;
 import bse202.sda.healary.createalarm.DayUtil;
@@ -137,7 +138,8 @@ public class MedicineAlarm {
         intent.putExtra(TITLE, title);
 
 
-        PendingIntent alarmPendingIntent = PendingIntent.getBroadcast(context, alarmId, intent, 0);
+        PendingIntent alarmPendingIntent = PendingIntent.getBroadcast(context, alarmId, intent,
+                PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE);
 
         Calendar calendar = Calendar.getInstance();
         calendar.setTimeInMillis(System.currentTimeMillis());
@@ -151,32 +153,19 @@ public class MedicineAlarm {
             calendar.set(Calendar.DAY_OF_MONTH, calendar.get(Calendar.DAY_OF_MONTH) + 1);
         }
 
-        if (!recurring) {
-            String toastText = null;
-            try {
-                toastText = String.format("One Time Alarm %s scheduled for %s at %02d:%02d", title, DayUtil.toDay(calendar.get(Calendar.DAY_OF_WEEK)), hour, minute, alarmId);
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-            Toast.makeText(context, toastText, Toast.LENGTH_LONG).show();
+        String toastText = String.format(Locale.getDefault(),
+                "Recurring Alarm %s scheduled for %s at %02d:%02d", title, getRecurringDaysText(),
+                hour, minute);
+        Toast.makeText(context, toastText, Toast.LENGTH_LONG).show();
 
-            alarmManager.setExact(
-                    AlarmManager.RTC_WAKEUP,
-                    calendar.getTimeInMillis(),
-                    alarmPendingIntent
-            );
-        } else {
-            String toastText = String.format("Recurring Alarm %s scheduled for %s at %02d:%02d", title, getRecurringDaysText(), hour, minute, alarmId);
-            Toast.makeText(context, toastText, Toast.LENGTH_LONG).show();
+        final long RUN_DAILY = 24 * 60 * 60 * 1000;
+        alarmManager.setRepeating(
+                AlarmManager.RTC_WAKEUP,
+                calendar.getTimeInMillis(),
+                RUN_DAILY,
+                alarmPendingIntent
+        );
 
-            final long RUN_DAILY = 24 * 60 * 60 * 1000;
-            alarmManager.setRepeating(
-                    AlarmManager.RTC_WAKEUP,
-                    calendar.getTimeInMillis(),
-                    RUN_DAILY,
-                    alarmPendingIntent
-            );
-        }
 
         this.started = true;
     }
@@ -184,11 +173,13 @@ public class MedicineAlarm {
     public void cancelAlarm(Context context) {
         AlarmManager alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
         Intent intent = new Intent(context, AlarmBroadcastReceiver.class);
-        PendingIntent alarmPendingIntent = PendingIntent.getBroadcast(context, alarmId, intent, 0);
+        PendingIntent alarmPendingIntent = PendingIntent.getBroadcast(context, alarmId, intent,
+                PendingIntent.FLAG_UPDATE_CURRENT | PendingIntent.FLAG_IMMUTABLE);
         alarmManager.cancel(alarmPendingIntent);
         this.started = false;
 
-        String toastText = String.format("Alarm cancelled for %02d:%02d with id %d", hour, minute, alarmId);
+        String toastText = String.format(Locale.getDefault(),
+                "Alarm cancelled for %02d:%02d", hour, minute);
         Toast.makeText(context, toastText, Toast.LENGTH_SHORT).show();
         Log.i("cancel", toastText);
     }
@@ -238,7 +229,9 @@ public class MedicineAlarm {
     }
 
     public void setCount(int count) {
-        this.count = count;
+        if (count >= 0){
+            this.count = count;
+        }
     }
 
     public void setAlarmId(int alarmId) {

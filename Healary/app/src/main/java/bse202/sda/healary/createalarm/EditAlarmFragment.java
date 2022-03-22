@@ -40,6 +40,8 @@ public class EditAlarmFragment extends Fragment {
 
     @BindView(R.id.fragment_editalarm_editAlarm)
     Button editAlarm;
+    @BindView(R.id.fragment_editalarm_take)
+    Button take;
 
     private long alarmId;
     private EditAlarmViewModel editAlarmViewModel;
@@ -72,6 +74,12 @@ public class EditAlarmFragment extends Fragment {
             Navigation.findNavController(v).navigate(R.id.action_editAlarmFragment_to_alarmsListFragment);
         });
 
+        take.setOnClickListener(v -> {
+            alarm.setCount(alarm.getCount() - alarm.getDosage());
+            editAlarmViewModel.edit(alarm);
+                }
+        );
+
         return view;
     }
 
@@ -79,7 +87,7 @@ public class EditAlarmFragment extends Fragment {
         title.setText(alarm.getTitle());
         description.setText(alarm.getDescription());
 
-        minCount.setText(String.valueOf(alarm.getMinCount()) );
+        minCount.setText(String.valueOf(alarm.getMinCount()));
         count.setText(String.valueOf(alarm.getCount()));
         dosage.setText(String.valueOf(alarm.getDosage()));
     }
@@ -92,8 +100,6 @@ public class EditAlarmFragment extends Fragment {
         alarm.setDescription(description.getText().toString());
 
         editAlarmViewModel.edit(alarm);
-
-
     }
 
     private int parseInt(EditText edit) {

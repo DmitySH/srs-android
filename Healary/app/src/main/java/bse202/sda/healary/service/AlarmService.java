@@ -1,7 +1,6 @@
 package bse202.sda.healary.service;
 
 
-import static bse202.sda.healary.application.App.CHANNEL_ID;
 import static bse202.sda.healary.broadcastreceiver.AlarmBroadcastReceiver.TITLE;
 
 import android.app.Notification;
@@ -13,7 +12,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.media.MediaPlayer;
-import android.os.Build;
 import android.os.IBinder;
 import android.os.Vibrator;
 
@@ -42,19 +40,7 @@ public class AlarmService extends Service {
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
-        Intent notificationIntent = new Intent(this, RingActivity.class);
-        PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, notificationIntent, 0);
-
-        String alarmTitle = String.format("%s Alarm", intent.getStringExtra(TITLE));
-
-//        Notification notification = new NotificationCompat.Builder(this, CHANNEL_ID)
-//                .setContentTitle(alarmTitle)
-//                .setContentText("Ring Ring .. Ring Ring")
-//                .setSmallIcon(R.drawable.ic_alarm_black_24dp)
-//                .setContentIntent(pendingIntent)
-//                .build();
         Notification notification = getNotification();
-
         mediaPlayer.start();
 
         long[] pattern = {0, 100, 1000};
@@ -67,26 +53,23 @@ public class AlarmService extends Service {
 
     public Notification getNotification() {
         String channel;
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O)
-            channel = createChannel();
-        else {
-            channel = "";
-        }
+        channel = createChannel();
         Intent notificationIntent = new Intent(this, RingActivity.class);
-        PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, notificationIntent, 0);
+
+        PendingIntent pendingIntent = PendingIntent.getActivity(this, 0,
+                notificationIntent, PendingIntent.FLAG_IMMUTABLE | PendingIntent.FLAG_UPDATE_CURRENT);
 
         String alarmTitle = "Alarm";
 
         NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(this, channel);
-        Notification notification = mBuilder
+
+
+        return mBuilder
                 .setCategory(Notification.CATEGORY_SERVICE).setContentTitle(alarmTitle)
                 .setContentText("Ring Ring .. Ring Ring")
                 .setSmallIcon(R.drawable.ic_alarm_black_24dp)
                 .setContentIntent(pendingIntent)
                 .build();
-
-
-        return notification;
     }
 
     @NonNull
