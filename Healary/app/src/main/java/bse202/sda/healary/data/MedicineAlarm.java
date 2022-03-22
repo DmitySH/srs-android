@@ -32,16 +32,24 @@ public class MedicineAlarm {
     @PrimaryKey(autoGenerate = true)
     private int alarmId;
 
-    private int hour, minute;
-    private boolean started, recurring;
-    private boolean monday, tuesday, wednesday, thursday, friday, saturday, sunday;
+    private final int hour;
+    private final int minute;
+    private boolean started;
+    private final boolean recurring;
+    private final boolean monday;
+    private final boolean tuesday;
+    private final boolean wednesday;
+    private final boolean thursday;
+    private final boolean friday;
+    private final boolean saturday;
+    private final boolean sunday;
     private String title;
 
     private String description;
     private int count, minCount, dosage;
 
 
-    private long created;
+    private final long created;
 
     public MedicineAlarm(int hour, int minute, String title,
                          long created, boolean started, boolean recurring,
@@ -152,7 +160,7 @@ public class MedicineAlarm {
         }
 
         String toastText = String.format(Locale.getDefault(),
-                "Recurring Alarm %s scheduled for %s at %02d:%02d", title, getRecurringDaysText(),
+                "Уведомление на %s по %s в %02d:%02d", title, getRecurringDaysText(),
                 hour, minute);
         Toast.makeText(context, toastText, Toast.LENGTH_LONG).show();
 
@@ -177,7 +185,7 @@ public class MedicineAlarm {
         this.started = false;
 
         String toastText = String.format(Locale.getDefault(),
-                "Alarm cancelled for %02d:%02d", hour, minute);
+                "Уведомление на %02d:%02d отменено", hour, minute);
         Toast.makeText(context, toastText, Toast.LENGTH_SHORT).show();
         Log.i("cancel", toastText);
     }
@@ -227,7 +235,7 @@ public class MedicineAlarm {
     }
 
     public void setCount(int count) {
-        if (count >= 0){
+        if (count >= 0) {
             this.count = count;
         }
     }

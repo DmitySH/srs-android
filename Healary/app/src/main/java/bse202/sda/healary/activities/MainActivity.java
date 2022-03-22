@@ -1,7 +1,6 @@
 package bse202.sda.healary.activities;
 
 import android.app.AlertDialog;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
@@ -26,7 +25,8 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         if (item.getItemId() == R.id.settings) {
-//            Intent intent = new Intent(MainActivity.this, SettingsActivity.class); startActivity(intent);
+            Intent intent = new Intent(MainActivity.this, SettingsActivity.class);
+            startActivity(intent);
         } else if (item.getItemId() == R.id.author) {
             AlertDialog.Builder dialog = new AlertDialog.Builder(MainActivity.this);
             try {
